@@ -29,7 +29,7 @@ public:
                 out.push_back(in);
                 in.clear();
             }
-        } else        std::cerr << "\n                            error                              \n";
+        } else   {std::cerr << "\n               error              \n"; exit(EXIT_FAILURE);}
     }
     matrix(const char& type_of_matrix, const dimension& n){
         if (type_of_matrix == 'E')     *this = matrix ("diag", 1, n);
@@ -43,12 +43,12 @@ public:
                 out.push_back(in);
                 in.clear();
             }
-        } else std::cerr << "\n                            error                              \n";
+        } else {std::cerr << "\n                       error                         \n"; exit(EXIT_FAILURE);}
     }
     matrix(std::vector<type> mas, dimension n, dimension m){
         this->n = n;  this->m = m;
-        if (m * n != mas.size())
-            std::cerr << "\n                    error                             \n";
+        if (m * n != mas.size()){
+            std::cerr << "\n                    error                             \n"; exit(EXIT_FAILURE);}
         for (dimension i = 0; i < n; ++i){
             for (dimension j = 0; j < m; ++j)
                 in.push_back(mas[i * m + j]);
@@ -60,8 +60,8 @@ public:
 
     matrix operator* (matrix B){
         matrix<type, dimension> answer (this->n, B.m);
-        if (this->m != B.n)
-            std::cerr << "\n                   error            \n";
+        if (this->m != B.n){
+            std::cerr << "\n                   error            \n"; exit(EXIT_FAILURE);}
         type sum = 0;
         for (dimension i = 0; i < n; ++i){
             for (dimension j = 0; j < m; ++j){
@@ -90,8 +90,8 @@ public:
 
     matrix operator+ (matrix B){
         matrix<type, dimension> answer (this->n, this->m);
-        if (this->m != B.m and this->n != B.n)
-            std::cerr << "\n                   error            \n";
+        if (this->m != B.m and this->n != B.n){
+            std::cerr << "\n                   error            \n"; exit(EXIT_FAILURE);}
         for (dimension i = 0; i < n; ++i){
             for (dimension j = 0; j < m; ++j)
                 answer.in.push_back(this->out[i][j] + B.out[i][j]);
@@ -115,8 +115,8 @@ public:
     }
 
     bool operator== (matrix B){
-        if (this->m != B.m and this->n != B.n)
-            std::cerr << "\n                   error            \n";
+        if (this->m != B.m and this->n != B.n){
+            std::cerr << "\n                   error            \n"; exit(EXIT_FAILURE);}
         for (dimension i = 0; i < n; ++i){
             for (dimension j = 0; j < m; ++j)
                 if (this->out[i][j] != B.out[i][j])
@@ -127,8 +127,8 @@ public:
 
     bool operator!= (matrix B){
         dimension flag = 0;
-        if (this->m != B.m and this->n != B.n)
-            std::cerr << "\n                   error            \n";
+        if (this->m != B.m and this->n != B.n) {
+            std::cerr << "\n                   error            \n"; exit(EXIT_FAILURE);}
         for (dimension i = 0; i < n; ++i){
             for (dimension j = 0; j < m; ++j)
                 if (this->out[i][j] == B.out[i][j])
